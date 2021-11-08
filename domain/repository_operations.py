@@ -59,9 +59,24 @@ def repository_operations(commands, *args):
 		if length <= 0:
 			raise ValueError("\nThe length is not positive\n")
 		repo.delete_points_from_square(up_left_corner, length)
-	else:
+	elif commands[1] == 10:
 		(repo,) = args
 		repo.plot_the_points()
+	elif commands[1] == 11:
+		(repo, center, radius) = args
+		circle_points = repo.all_points_circle(center, radius)
+		new_repo = PointRepository(circle_points)
+		print(new_repo)
+	elif commands[1] == 12:
+		(repo, color) = args
+		if not check_color(color):
+			raise ValueError("\nThe color is invalid you can choose only from these colors: yellow, red, green, blue, magenta\n")
+		print(f"\n{repo.counter_points_color(color)}\n")
+	elif commands[1] == 13:
+		(repo, value) = args
+		repo.shift_y_point(value)
+
+
 
 
 

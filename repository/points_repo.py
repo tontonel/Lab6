@@ -147,4 +147,40 @@ class PointRepository:
 		"""
 		return len(self.points)
 
+	def all_points_circle(self, center, radius):
+		"""
+		get all points in a given circle
+		:param center:
+		:param radius:
+		:return:
+		"""
+		def check_inside_circle(point):
+			if (point.x - center.x) ** 2 + (point.y - center.y) ** 2 <= radius ** 2:
+				return True
+			return False
+		circle_points = []
+		for pt in self.points:
+			if check_inside_circle(pt):
+				circle_points.append(pt)
+		return circle_points
 
+	def counter_points_color(self, color):
+		"""
+		get the number of points with a given color
+		:param color:
+		:return:
+		"""
+		counter = 0
+		for point in self.points:
+			if point.color == color:
+				counter += 1
+		return counter
+
+	def shift_y_points(self, value):
+		"""
+		shifts all y coordinates by a given value
+		:param value:
+		:return:
+		"""
+		for point in self.points:
+			point.set_y(point.get_y() + value)

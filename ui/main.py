@@ -67,8 +67,20 @@ def run():
 					up_left_corner = MyPoints(coord_x, coord_y, "red")
 					length = int(input("Enter square side's length: "))
 					repository_operations(commands, repo, up_left_corner, length)
-				else:
+				elif commands[1] == 10:
 					repository_operations(commands, repo)
+				elif commands[1] == 11:
+					coord_x = int(input("Enter x coordinate of center: "))
+					coord_y = int(input("Enter y coordinate of center: "))
+					radius = int(input("Enter radius of the circle: "))
+					center = MyPoints(coord_x, coord_y, "red")
+					repository_operations(commands, repo, center, radius)
+				elif commands[1] == 12:
+					color = input("Enter a color: ")
+					repository_operations(commands, repo, color)
+				elif commands[1] == 13:
+					value = int(input("Enter a value: "))
+					repository_operations(commands, repo, value)
 		except TypeError as ty:
 			print(f"\n{ty}\n")
 		except ValueError as vl:

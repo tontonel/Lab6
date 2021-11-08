@@ -13,7 +13,10 @@ def repo_menu():
 	print("8.Delete a point by index")
 	print("9.Delete all points that are inside a given square")
 	print("10.Plot all points in a chart")
+	print("11.Get all points in a given circle (center and radius)")
+	print("12.Get the counter of number of given color")
+	print("13.Shift all the y coordinates with a given value")
 	command = int(input("Enter a command: "))
-	if not 1 <= command <= 10:
+	if not 1 <= command <= 13:
 		raise TypeError("Your command is invalid")
 	return command
