@@ -155,7 +155,7 @@ class PointRepository:
 		:return:
 		"""
 		def check_inside_circle(point):
-			if (point.x - center.x) ** 2 + (point.y - center.y) ** 2 <= radius ** 2:
+			if (point.coord_x - center.coord_x) ** 2 + (point.coord_y - center.coord_y) ** 2 <= radius ** 2:
 				return True
 			return False
 		circle_points = []

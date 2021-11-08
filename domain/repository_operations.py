@@ -74,7 +74,7 @@ def repository_operations(commands, *args):
 		print(f"\n{repo.counter_points_color(color)}\n")
 	elif commands[1] == 13:
 		(repo, value) = args
-		repo.shift_y_point(value)
+		repo.shift_y_points(value)
 
 
 
