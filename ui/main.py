@@ -16,10 +16,11 @@ def run():
 	while not commands[0] == 0:
 		try:
 			commands = main_menu()
+			print(commands)
 			if commands[0] == 1:
 				if commands[1] == 1:
 					if commands[2] == 1 or commands[2] == 2:
-						coord = int(input("Enter the coordinate: "))
+						coord = int(input("Enter the coordinate: "))  # for both coordinates
 						point_operations(commands, my_point, coord)
 					else:
 						color = input("Enter color: ")

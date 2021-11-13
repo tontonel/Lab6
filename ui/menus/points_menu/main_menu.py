@@ -20,4 +20,4 @@ def main_menu():
 		return [command]
 	elif command != 0:
 		raise ValueError("Your command is invalid")
-	return [command, subcommand]
+	return command, subcommand

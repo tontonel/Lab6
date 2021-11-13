@@ -13,9 +13,13 @@ def main_menu():
 	command = int(input("Enter a command: "))
 	commands = [command]
 	if command == 1:
-		commands.append(points_menu())
+		(command, subcommand) = points_menu()
+		commands.append(command)
+		commands.append(subcommand)
 	elif command == 2:
-		commands.append(repo_menu())
+		(command, subcommand) = repo_menu()
+		commands.append(command)
+		commands.append(subcommand)
 	elif command == 0:
 		pass
 	else:
