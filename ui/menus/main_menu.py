@@ -17,9 +17,8 @@ def main_menu():
 		commands.append(command)
 		commands.append(subcommand)
 	elif command == 2:
-		(command, subcommand) = repo_menu()
+		command = repo_menu()
 		commands.append(command)
-		commands.append(subcommand)
 	elif command == 0:
 		pass
 	else:

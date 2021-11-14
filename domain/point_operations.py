@@ -1,5 +1,6 @@
 from utils.utils import check_color
 
+
 def point_operations(commands, *args):
 	"""
 	make operations on points

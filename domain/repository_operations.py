@@ -9,7 +9,7 @@ def repository_operations(commands, *args):
 	"""
 	if commands[1] == 1:
 		(repo, new_point) = args
-		if not check_color(new_point.color):
+		if not check_color(new_point.get_color()):
 			raise ValueError("The color is invalid you can choose only from these colors: yellow, red, green, blue, magenta")
 		repo.add(new_point)
 	elif commands[1] == 2:
@@ -35,6 +35,8 @@ def repository_operations(commands, *args):
 			print(new_repo)
 	elif commands[1] == 5:
 		(repo, up_left_corner, length) = args
+		if length <= 0:
+			raise ValueError("\nThe length of the square has to be positive\n")
 		elements = repo.get_points_from_square(up_left_corner, length)
 		if length <= 0:
 			raise ValueError("\nThe length is not positive\n")
@@ -48,7 +50,7 @@ def repository_operations(commands, *args):
 		print(f"\n{repo.minimum_distance()}\n")
 	elif commands[1] == 7:
 		(repo, index, point) = args
-		if not check_color(point.color):
+		if not check_color(point.get_color()):
 			raise ValueError("\nThe color is invalid you can choose only from these colors: yellow, red, green, blue, magenta\n")
 		repo.update_point_index(index, point)
 	elif commands[1] == 8:
@@ -57,7 +59,7 @@ def repository_operations(commands, *args):
 	elif commands[1] == 9:
 		(repo, up_left_corner, length) = args
 		if length <= 0:
-			raise ValueError("\nThe length is not positive\n")
+			raise ValueError("\nThe length of the square has to be positive\n")
 		repo.delete_points_from_square(up_left_corner, length)
 	elif commands[1] == 10:
 		(repo,) = args

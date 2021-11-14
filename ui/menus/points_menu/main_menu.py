@@ -18,6 +18,6 @@ def main_menu():
 		subcommand = get_val()
 	elif command == 3:
 		pass
-	elif command != 0:
+	else:
 		raise ValueError("Your command is invalid")
 	return command, subcommand

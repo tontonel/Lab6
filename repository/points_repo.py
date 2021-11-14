@@ -9,7 +9,7 @@ class PointRepository:
 		"""
 		if point_list is None:
 			point_list = []
-		self.points = point_list
+		self.__points = point_list
 
 	def add(self, point):
 		"""
@@ -17,14 +17,14 @@ class PointRepository:
 		:param point:
 		:return:
 		"""
-		self.points.append(point)
+		self.__points.append(point)
 
 	def get_all_points(self):
 		"""
 		get all the points
 		:return:
 		"""
-		return self.points
+		return self.__points
 
 	def get_point_index(self, index):
 		"""
@@ -32,8 +32,8 @@ class PointRepository:
 		:param index: index from which we modify value
 		:return:
 		"""
-		if 0 <= index <= len(self.points):
-			return self.points[index]
+		if 0 <= index <= len(self.__points):
+			return self.__points[index]
 		raise IndexError("Your index is not in the repository")
 
 	def get_points_of_color(self, color):
@@ -43,8 +43,8 @@ class PointRepository:
 		:return:
 		"""
 		color_points = []
-		for point in self.points:
-			if point.color == color:
+		for point in self.__points:
+			if point.get_color() == color:
 				color_points.append(point)
 		return color_points
 
@@ -56,8 +56,8 @@ class PointRepository:
 		:return:
 		"""
 		points_in_square_list = []
-		for point in self.points:
-			if up_left_corner.coord_x + length >= point.coord_x >= up_left_corner.coord_x and up_left_corner.coord_y - length <= point.coord_y <= up_left_corner.coord_y:
+		for point in self.__points:
+			if up_left_corner.get_x() + length >= point.get_x() >= up_left_corner.get_x() and up_left_corner.get_y() - length <= point.get_y() <= up_left_corner.get_y():
 				points_in_square_list.append(point)
 		return points_in_square_list
 
@@ -73,14 +73,14 @@ class PointRepository:
 			:param point_2: second point
 			:return:
 			"""
-			return ((point_1.coord_x - point_2.coord_x) ** 2 + (point_1.coord_y - point_2.coord_y) ** 2) ** (1 / 2)
+			return ((point_1.get_x() - point_2.get_x()) ** 2 + (point_1.get_y() - point_2.get_y()) ** 2) ** (1 / 2)
 
 		minimum = None
-		if len(self.points) >= 2:
-			minimum = calculate_distance(self.points[0], self.points[1])
-		for i in range(len(self.points)):
-			for j in range(i + 1, len(self.points)):
-				minimum = min(minimum, calculate_distance(self.points[i], self.points[j]))
+		if len(self.__points) >= 2:
+			minimum = calculate_distance(self.__points[0], self.__points[1])
+		for i in range(len(self.__points)):
+			for j in range(i + 1, len(self.__points)):
+				minimum = min(minimum, calculate_distance(self.__points[i], self.__points[j]))
 		if minimum is None:
 			raise ValueError("The repository does not have enough points")
 		return minimum
@@ -92,8 +92,8 @@ class PointRepository:
 		:param point: point to change with
 		:return:
 		"""
-		if 0 <= index < len(self.points):
-			self.points[index] = point
+		if 0 <= index < len(self.__points):
+			self.__points[index] = point
 		else:
 			raise IndexError("The index is invalid")
 
@@ -103,8 +103,8 @@ class PointRepository:
 		:param index: the index
 		:return:
 		"""
-		if 0 <= index < len(self.points):
-			self.points.pop(index)
+		if 0 <= index < len(self.__points):
+			self.__points.pop(index)
 		else:
 			raise IndexError("The index is invalid")
 
@@ -116,18 +116,18 @@ class PointRepository:
 		:return:
 		"""
 		new_points = []
-		for point in self.points:
-			if not up_left_corner.coord_x + length >= point.coord_x >= up_left_corner.coord_x and up_left_corner.coord_y - length <= point.coord_y <= up_left_corner.coord_y:
+		for point in self.__points:
+			if not up_left_corner.get_x() + length >= point.get_x() >= up_left_corner.get_x() and up_left_corner.get_y() - length <= point.get_y() <= up_left_corner.get_y():
 				new_points.append(point)
-		self.points = new_points
+		self.__points = new_points
 
 	def plot_the_points(self):
 		"""
 		plot all the point in a chart
 		:return:
 		"""
-		for point in self.points:
-			plt.scatter(point.coord_x, point.coord_y, 100, point.color)
+		for point in self.__points:
+			plt.scatter(point.get_x(), point.get_y(), 100, point.get_color())
 		plt.show()
 
 	def __str__(self):
@@ -136,7 +136,7 @@ class PointRepository:
 		:return:
 		"""
 		printing = "\n"
-		for point in self.points:
+		for point in self.__points:
 			printing += point.__str__() + "\n"
 		return printing
 
@@ -145,7 +145,7 @@ class PointRepository:
 		return the length of points list
 		:return:
 		"""
-		return len(self.points)
+		return len(self.__points)
 
 	def all_points_circle(self, center, radius):
 		"""
@@ -155,11 +155,11 @@ class PointRepository:
 		:return:
 		"""
 		def check_inside_circle(point):
-			if (point.coord_x - center.coord_x) ** 2 + (point.coord_y - center.coord_y) ** 2 <= radius ** 2:
+			if (point.get_x() - center.get_x()) ** 2 + (point.get_y() - center.get_y()) ** 2 <= radius ** 2:
 				return True
 			return False
 		circle_points = []
-		for pt in self.points:
+		for pt in self.__points:
 			if check_inside_circle(pt):
 				circle_points.append(pt)
 		return circle_points
@@ -171,8 +171,8 @@ class PointRepository:
 		:return:
 		"""
 		counter = 0
-		for point in self.points:
-			if point.color == color:
+		for point in self.__points:
+			if point.get_color() == color:
 				counter += 1
 		return counter
 
@@ -182,5 +182,5 @@ class PointRepository:
 		:param value:
 		:return:
 		"""
-		for point in self.points:
+		for point in self.__points:
 			point.set_y(point.get_y() + value)
