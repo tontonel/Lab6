@@ -23,7 +23,7 @@ def point_operations(commands, *args):
 		(point,) = args
 		if commands[2] == 1:
 			print(f"\n{point.get_x()}\n")
-		elif commands[2] == 1:
+		elif commands[2] == 2:
 			print(f"\n{point.get_y()}\n")
 		else:
 			print(f"\n{point.get_color()}\n")

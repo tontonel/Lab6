@@ -149,6 +149,8 @@ class PointRepository:
 		printing function
 		:return:
 		"""
+		if len(self.__points) == 0:
+			return "\nThere are no points in repository\n"
 		printing = "\n"
 		for point in self.__points:
 			printing += point.__str__() + "\n"
