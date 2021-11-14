@@ -87,6 +87,8 @@ def run():
 			print(f"\n{vl}\n")
 		except IndexError as ir:
 			print(f"\n{ir}\n")
+		except Exception as ex:
+			print(f"\n{ex}\n")
 	return None
 
 

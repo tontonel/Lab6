@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from utils.utils import check_color
 
 
 class PointRepository:
@@ -17,6 +18,11 @@ class PointRepository:
 		:param point:
 		:return:
 		"""
+		if not check_color(point.get_color()):
+			raise ValueError("\nThe color is invalid you can choose only from these colors: yellow, red, green, blue, magenta\n")
+		for pt in self.__points:
+			if point.get_x() == pt.get_x() and point.get_y() == pt.get_y():
+				raise ValueError("There is another point with same values")
 		self.__points.append(point)
 
 	def get_all_points(self):
@@ -42,11 +48,13 @@ class PointRepository:
 		:param color:
 		:return:
 		"""
+		if not check_color(color):
+			raise ValueError("\nThe color is invalid you can choose only from these colors: yellow, red, green, blue, magenta\n")
 		color_points = []
 		for point in self.__points:
 			if point.get_color() == color:
 				color_points.append(point)
-		return color_points
+		return PointRepository(color_points)
 
 	def get_points_from_square(self, up_left_corner, length):
 		"""
@@ -55,11 +63,13 @@ class PointRepository:
 		:param length: length of a square side
 		:return:
 		"""
+		if length <= 0:
+			raise ValueError("the length should be positive")
 		points_in_square_list = []
 		for point in self.__points:
 			if up_left_corner.get_x() + length >= point.get_x() >= up_left_corner.get_x() and up_left_corner.get_y() - length <= point.get_y() <= up_left_corner.get_y():
 				points_in_square_list.append(point)
-		return points_in_square_list
+		return PointRepository(points_in_square_list)
 
 	def minimum_distance(self):
 		"""
@@ -92,6 +102,8 @@ class PointRepository:
 		:param point: point to change with
 		:return:
 		"""
+		if not check_color(point.get_color()):
+			raise ValueError("\nThe color is invalid you can choose only from these colors: yellow, red, green, blue, magenta\n")
 		if 0 <= index < len(self.__points):
 			self.__points[index] = point
 		else:
@@ -115,9 +127,11 @@ class PointRepository:
 		:param length: length of the sides of square
 		:return:
 		"""
+		if length <= 0:
+			raise ValueError("the length should be positive")
 		new_points = []
 		for point in self.__points:
-			if not up_left_corner.get_x() + length >= point.get_x() >= up_left_corner.get_x() and up_left_corner.get_y() - length <= point.get_y() <= up_left_corner.get_y():
+			if not (up_left_corner.get_x() + length >= point.get_x() >= up_left_corner.get_x() and up_left_corner.get_y() - length <= point.get_y() <= up_left_corner.get_y()):
 				new_points.append(point)
 		self.__points = new_points
 
@@ -154,6 +168,9 @@ class PointRepository:
 		:param radius:
 		:return:
 		"""
+		if radius <= 0:
+			raise ValueError("The radius should be positive")
+
 		def check_inside_circle(point):
 			if (point.get_x() - center.get_x()) ** 2 + (point.get_y() - center.get_y()) ** 2 <= radius ** 2:
 				return True
@@ -162,7 +179,7 @@ class PointRepository:
 		for pt in self.__points:
 			if check_inside_circle(pt):
 				circle_points.append(pt)
-		return circle_points
+		return PointRepository(circle_points)
 
 	def counter_points_color(self, color):
 		"""
@@ -170,6 +187,8 @@ class PointRepository:
 		:param color:
 		:return:
 		"""
+		if not check_color(color):
+			raise ValueError("\nThe color is invalid you can choose only from these colors: yellow, red, green, blue, magenta\n")
 		counter = 0
 		for point in self.__points:
 			if point.get_color() == color:

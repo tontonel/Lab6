@@ -1,3 +1,6 @@
+from utils.utils import check_color
+
+
 class MyPoints:
 	def __init__(self, coord_x, coord_y, color):
 		"""
@@ -32,6 +35,8 @@ class MyPoints:
 		:param color: color of point
 		:return:
 		"""
+		if not check_color(color):
+			raise ValueError("\nThe color is invalid you can choose only from these colors: yellow, red, green, blue, magenta\n")
 		self.__color = color
 
 	def get_x(self):

@@ -14,12 +14,11 @@ def repository_operations(commands, *args):
 		repo.add(new_point)
 	elif commands[1] == 2:
 		(repo,) = args
-		elements = repo.get_all_points()
-		if len(elements) == 0:
+		elements = PointRepository(repo.get_all_points())
+		if elements.length == 0:
 			print("\nThere are no points in repository\n")
 		else:
-			new_repo = PointRepository(elements)
-			print(new_repo)
+			print(elements)
 	elif commands[1] == 3:
 		(repo, index) = args
 		print(f"\n{repo.get_point_index(index)}\n")
@@ -28,11 +27,10 @@ def repository_operations(commands, *args):
 		if not check_color(color):
 			raise ValueError("The color is invalid you can choose only from these colors: yellow, red, green, blue, magenta")
 		color_points = repo.get_points_of_color(color)
-		if len(color_points) == 0:
+		if color_points.length() == 0:
 			print(f"\nThere are no {color} points in repository\n")
 		else:
-			new_repo = PointRepository(color_points)
-			print(new_repo)
+			print(color_points)
 	elif commands[1] == 5:
 		(repo, up_left_corner, length) = args
 		if length <= 0:
@@ -40,11 +38,10 @@ def repository_operations(commands, *args):
 		elements = repo.get_points_from_square(up_left_corner, length)
 		if length <= 0:
 			raise ValueError("\nThe length is not positive\n")
-		if len(elements) == 0:
-			print("\nThere are no elements in this square\n")
+		if elements.length() == 0:
+			raise Exception("\nThere are no elements in this square\n")
 		else:
-			new_repo = PointRepository(elements)
-			print(new_repo)
+			print(elements)
 	elif commands[1] == 6:
 		(repo,) = args
 		print(f"\n{repo.minimum_distance()}\n")
@@ -67,8 +64,9 @@ def repository_operations(commands, *args):
 	elif commands[1] == 11:
 		(repo, center, radius) = args
 		circle_points = repo.all_points_circle(center, radius)
-		new_repo = PointRepository(circle_points)
-		print(new_repo)
+		if circle_points.length() == 0:
+			raise Exception("There are no points in this circle")
+		print(circle_points)
 	elif commands[1] == 12:
 		(repo, color) = args
 		if not check_color(color):
