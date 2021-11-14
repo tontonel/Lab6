@@ -1,3 +1,5 @@
+from utils.utils import check_color
+
 def point_operations(commands, *args):
 	"""
 	make operations on points
@@ -5,7 +7,6 @@ def point_operations(commands, *args):
 	"""
 	if commands[1] == 1:
 		if commands[2] == 1:
-			print(1)
 			(point, coord) = args
 			point.set_x(coord)
 		elif commands[2] == 2:
@@ -13,7 +14,10 @@ def point_operations(commands, *args):
 			point.set_y(coord)
 		else:
 			(point, color) = args
-			point.set_color(color)
+			if check_color(color):
+				point.set_color(color)
+			else:
+				raise ValueError("The color is invalid you can choose only from these colors: yellow, red, green, blue, magenta")
 	elif commands[1] == 2:
 		(point,) = args
 		if commands[2] == 1:

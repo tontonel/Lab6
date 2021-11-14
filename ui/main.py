@@ -16,7 +16,6 @@ def run():
 	while not commands[0] == 0:
 		try:
 			commands = main_menu()
-			print(commands)
 			if commands[0] == 1:
 				if commands[1] == 1:
 					if commands[2] == 1 or commands[2] == 2:
@@ -25,7 +24,7 @@ def run():
 					else:
 						color = input("Enter color: ")
 						point_operations(commands, my_point, color)
-				if commands[1] == 2:
+				elif commands[1] == 2:
 					point_operations(commands, my_point)
 				else:
 					point_operations(commands, my_point)
